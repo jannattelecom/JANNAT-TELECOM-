@@ -1,5 +1,12 @@
 [
   {
+    "id": 1,
+    "op": "Grameenphone",
+    "name": "100 জিবি 100 মিনিট 30 দিন",
+    "price": 750,
+    "old": 899
+  },
+  {
     "id": 2,
     "op": "Grameenphone",
     "name": "unlimited data 30 day",
@@ -40,12 +47,5 @@
     "name": "15GB 30 দিন",
     "price": 249,
     "old": 299
-  },
-  {
-    "id": 8,
-    "op": "Teletalk",
-    "name": "10GB 30 দিন",
-    "price": 199,
-    "old": 249
   }
 ]
