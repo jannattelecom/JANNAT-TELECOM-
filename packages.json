@@ -1,16 +1,16 @@
 [
   {
+    "id": 5,
+    "op": "Robi",
+    "name": "40GB + 500 মিনিট",
+    "price": 499,
+    "old": 599
+  },
+  {
     "id": 6,
     "op": "Airtel",
     "name": "25GB 30 দিন",
     "price": 349,
     "old": 429
-  },
-  {
-    "id": 7,
-    "op": "Banglalink",
-    "name": "15GB 30 দিন",
-    "price": 249,
-    "old": 299
   }
 ]
