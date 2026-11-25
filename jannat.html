@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jannat Telecom</title>
+<style>
+*{box-sizing:border-box;font-family:Arial}body{margin:0;background:#0f172a;padding:12px}
+.card{background:#fff;max-width:420px;margin:0 auto;padding:20px;border-radius:20px}
+.logo{width:60px;height:60px;background:#7c3aed;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:bold;margin:0 auto}
+h2,h3{text-align:center}input{width:100%;padding:12px;margin:7px 0;border:1px solid #ddd;border-radius:10px}
+button{width:100%;padding:12px;border:none;border-radius:10px;background:#7c3aed;color:#fff;font-weight:bold;cursor:pointer;margin-top:8px}
+button.sec{background:#fff;color:#7c3aed;border:1.5px solid #7c3aed}
+.pkg{border:1px solid #eee;padding:12px;border-radius:12px;margin:10px 0;display:flex;justify-content:space-between;align-items:center}
+.price{color:#7c3aed;font-size:18px;font-weight:bold}
+.hidden{display:none}#msg{text-align:center;color:red;font-size:13px;min-height:18px}
+.order{border:1px solid #eee;padding:10px;border-radius:10px;margin:8px 0;font-size:13px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.small{font-size:12px;color:#666;text-align:center}
+.tabs{display:flex;gap:8px}.tabs button{flex:1}.tabs button.active{background:#111}
+</style>
+</head>
+<body>
+
+<!-- LOGIN / REGISTER -->
+<div id="loginPage" class="card">
+<div class="logo">J</div><h2>Jannat Telecom</h2>
+<p style="text-align:center;color:#666">কাস্টমার লগইন / রেজিস্ট্রেশন</p>
+
+<div class="tabs">
+<button id="tabLogin" class="active">লগইন</button>
+<button id="tabReg" class="sec">নতুন অ্যাকাউন্ট</button>
+</div>
+
+<!-- লগইন ফরম -->
+<div id="loginForm">
+<input type="tel" id="loginPhone" placeholder="আপনার মোবাইল নাম্বার: 01XXXXXXXXX">
+<input type="password" id="loginPass" placeholder="পাসওয়ার্ড">
+<button id="loginBtn">লগইন</button>
+</div>
+
+<!-- রেজিস্ট্রেশন ফরম - কাস্টমার নিজের নাম্বার দিবে -->
+<div id="regForm" class="hidden">
+<input type="text" id="regName" placeholder="আপনার নাম: যেমন রহিম">
+<input type="tel" id="regPhone" placeholder="আপনার মোবাইল নাম্বার: 01XXXXXXXXX">
+<input type="password" id="regPass" placeholder="পাসওয়ার্ড (৬ অক্ষর)">
+<button id="regBtn" style="background:#16a34a">রেজিস্ট্রেশন করুন</button>
+<p class="small">আপনার নাম্বার দিয়েই অ্যাকাউন্ট হবে। অন্য কারো নাম্বার দিবেন না।</p>
+</div>
+<div id="msg"></div>
+</div>
+
+<!-- HOME -->
+<div id="homePage" class="card hidden">
+<div class="top"><b>👋 <span id="userPhone"></span></b><button style="width:auto;padding:8px 12px" id="logoutBtn">লগআউট</button></div>
+<h3>🔥 আজকের অফার</h3>
+<div id="pkgList">লোড হচ্ছে...</div>
+<button id="myHistoryBtn" class="sec">📜 আমার History</button>
+<button id="adminBtn" class="hidden" style="background:#111">⚙️ Admin Panel খুলুন</button>
+<div id="myHistory" class="hidden"></div>
+</div>
+
+<!-- ADMIN -->
+<div id="adminPage" class="card hidden">
+<h3>⚙️ Admin Panel</h3>
+<p class="small">শুধু আপনি - 01955579367</p>
+<input id="pkgName" placeholder="প্যাকেজের নাম: 10GB 30 দিন">
+<input id="pkgPrice" type="number" placeholder="দাম: 199">
+<input id="pkgDesc" placeholder="বিবরণ: Grameenphone">
+<button id="addPkgBtn" style="background:#16a34a">+ নতুন প্যাকেজ Add করুন</button>
+<h3>সব প্যাকেজ</h3>
+<div id="adminPkgList"></div>
+<h3>📜 সব অর্ডার History</h3>
+<div id="allOrders"></div>
+<h3>👥 সব কাস্টমার</h3>
+<div id="allUsers"></div>
+<button class="sec" id="backBtn">⬅️ হোমে ফিরুন</button>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const ADMIN_PHONE = "01955579367";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB6jM1QOSlNgka4BNBWiOpj01sceVnyuMw",
+  authDomain: "jannat-telecom-cec5b.firebaseapp.com",
+  projectId: "jannat-telecom-cec5b",
+  storageBucket: "jannat-telecom-cec5b.firebasestorage.app",
+  messagingSenderId: "729272283505",
+  appId: "1:729272283505:web:72c6c0d9004e1fe32a86d0"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app); const db = getFirestore(app);
+let currentPhone = ""; let currentName="";
+
+function clean(p){return p.replace(/[^0-9]/g,'');}
+function toEmail(p){return clean(p)+"@jannattelecom.com";}
+function show(id){['loginPage','homePage','adminPage'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');}
+
+tabLogin.onclick=()=>{loginForm.classList.remove('hidden');regForm.classList.add('hidden');tabLogin.classList.add('active');tabReg.classList.remove('active');};
+tabReg.onclick=()=>{regForm.classList.remove('hidden');loginForm.classList.add('hidden');tabReg.classList.add('active');tabLogin.classList.remove('active');};
+
+loginBtn.onclick=async()=>{
+  let p=clean(loginPhone.value); if(p.length<10){msg.innerText='সঠিক নাম্বার দিন';return;}
+  try{await signInWithEmailAndPassword(auth,toEmail(p),loginPass.value);}catch(e){msg.innerText='ভুল নাম্বার বা পাসওয়ার্ড';}
+};
+regBtn.onclick=async()=>{
+  let name=regName.value.trim(); let p=clean(regPhone.value);
+  if(!name){msg.innerText='আপনার নাম দিন';return;}
+  if(p.length<10){msg.innerText='সঠিক মোবাইল নাম্বার দিন';return;}
+  if(regPass.value.length<6){msg.innerText='পাসওয়ার্ড ৬ অক্ষর হতে হবে';return;}
+  try{
+    let u=await createUserWithEmailAndPassword(auth,toEmail(p),regPass.value);
+    await setDoc(doc(db,"users",u.user.uid),{name:name,phone:p,time:Date.now()});
+    msg.style.color='green';msg.innerText='হয়ে গেছে '+name+'! এখন লগইন করুন';
+    tabLogin.onclick();
+  }catch(e){msg.innerText='এই নাম্বারে আগেই অ্যাকাউন্ট আছে, লগইন করুন';}
+};
+logoutBtn.onclick=()=>signOut(auth);
+adminBtn.onclick=()=>{show('adminPage');loadAdmin();};
+backBtn.onclick=()=>show('homePage');
+myHistoryBtn.onclick=async()=>{myHistory.classList.toggle('hidden');let q=await getDocs(collection(db,"orders"));let html="<h4>আমার অর্ডার</h4>";q.forEach(d=>{let o=d.data();if(o.phone===currentPhone)html+=`<div class="order">${o.pkg} - ${o.price}৳<br><small>${new Date(o.time).toLocaleString()}</small></div>`});myHistory.innerHTML=html||"কোনো অর্ডার নাই";};
+
+onAuthStateChanged(auth,async(user)=>{
+  if(user){currentPhone=user.email.replace('@jannattelecom.com','');userPhone.innerText=currentPhone;show('homePage');loadPackages();
+    if(currentPhone===ADMIN_PHONE) adminBtn.classList.remove('hidden'); else adminBtn.classList.add('hidden');
+  }else show('loginPage');
+});
+async function loadPackages(){
+  let q=await getDocs(collection(db,"packages"));let html="";
+  q.forEach(d=>{let p=d.data();html+=`<div class="pkg"><div><b>${p.name}</b><br><small>${p.desc||''}</small></div><div style="text-align:right"><div class="price">${p.price}৳</div><button style="width:auto;padding:8px 14px" onclick="buyPkg('${p.name}','${p.price}')">কিনুন</button></div></div>`});
+  pkgList.innerHTML=html||"এখনো কোনো প্যাকেজ নাই";
+}
+window.buyPkg=async(name,price)=>{await addDoc(collection(db,"orders"),{phone:currentPhone,pkg:name,price:price,time:Date.now()});alert(name+" অর্ডার হয়ে গেছে!");};
+addPkgBtn.onclick=async()=>{
+  if(!pkgName.value||!pkgPrice.value){alert('নাম আর দাম দিন');return;}
+  await addDoc(collection(db,"packages"),{name:pkgName.value,price:pkgPrice.value,desc:pkgDesc.value});
+  pkgName.value='';pkgPrice.value='';pkgDesc.value='';loadAdmin();loadPackages();alert('প্যাকেজ Add হয়ে গেছে!');
+};
+async function loadAdmin(){
+  let q=await getDocs(collection(db,"packages"));let html="";
+  q.forEach(d=>{let p=d.data();html+=`<div class="pkg"><div><b>${p.name}</b> - ${p.price}৳</div><button style="width:auto;background:#ef4444" onclick="delPkg('${d.id}')">Delete</button></div>`});
+  adminPkgList.innerHTML=html||"কোনো প্যাকেজ নাই";
+  let o=await getDocs(query(collection(db,"orders"),orderBy("time","desc")));let oh="";
+  o.forEach(d=>{let x=d.data();oh+=`<div class="order">📱 ${x.phone}<br>📦 ${x.pkg} - ${x.price}৳<br><small>${new Date(x.time).toLocaleString()}</small></div>`});
+  allOrders.innerHTML=oh||"কোনো অর্ডার নাই";
+  let u=await getDocs(collection(db,"users"));let uh="";
+  u.forEach(d=>{let x=d.data();uh+=`<div class="order">👤 ${x.name}<br>📱 ${x.phone}</div>`});
+  allUsers.innerHTML=uh||"কোনো কাস্টমার নাই";
+}
+window.delPkg=async(id)=>{if(confirm('ডিলিট করবেন?')){await deleteDoc(doc(db,"packages",id));loadAdmin();loadPackages();}};
+</script>
+</body>
+</html>
