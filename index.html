@@ -1,50 +1,65 @@
 <!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jannat Telecom - Best Recharge Offer</title>
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#ff0080">
+<html lang="bn"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jannat Telecom - সব অফার এক জায়গায়</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+*{box-sizing:border-box;font-family:sans-serif;margin:0;padding:0}
 body{background:#f0f2f5}
-.header{background:linear-gradient(135deg,#ff0080,#7928ca);color:#fff;text-align:center;padding:30px 15px;border-radius:0 0 25px 25px}
-.header h1{font-size:32px}
-.header p{margin-top:8px}
-.btn{display:inline-block;background:#25D366;color:#fff;padding:12px 25px;border-radius:30px;text-decoration:none;font-weight:bold;margin-top:15px}
-.installBtn{display:block;background:#ffc107;color:#000;text-align:center;padding:14px;margin:15px;border-radius:12px;font-weight:bold;border:0;width:calc(100% - 30px);font-size:16px}
-.container{padding:15px;max-width:500px;margin:auto}
-.card{background:#fff;border-radius:18px;padding:18px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.price{font-size:26px;font-weight:bold}
-.price s{font-size:15px;color:#999}
-.tag{background:#ffebf3;color:#ff0080;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}
-.order{display:block;text-align:center;background:#111;color:#fff;padding:12px;border-radius:12px;text-decoration:none;margin-top:12px;font-weight:bold}
-.footer{text-align:center;padding:20px;color:#888;font-size:13px}
-</style>
-</head>
-<body>
-<div class="header">
-<h1>🌸 Jannat Telecom 🌸</h1>
-<p>সবচেয়ে কম দামে সব সিমের অফার</p>
-<p>১০০% বিশ্বস্ত - দ্রুত ডেলিভারি</p>
-<a class="btn" href="https://wa.me/971566612164">WhatsApp এ অর্ডার করুন</a>
-</div>
-<button class="installBtn" id="installBtn">📱 অ্যাপ ডাউনলোড করুন - হোম স্ক্রিনে রাখুন</button>
-<div class="container">
-<div class="card"><span class="tag">GRAMEENPHONE</span><h2>40 GB + 800 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 649 <s>৳ 799</s></div><a class="order" href="https://wa.me/971566612164?text=GP 40GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
-<div class="card"><span class="tag">ROBI</span><h2>50 GB + 1000 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 699 <s>৳ 899</s></div><a class="order" href="https://wa.me/971566612164?text=Robi 50GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
-<div class="card"><span class="tag">AIRTEL</span><h2>60 GB + 1100 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 719 <s>৳ 949</s></div><a class="order" href="https://wa.me/971566612164?text=Airtel 60GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
-<div class="card"><span class="tag">BANGLALINK</span><h2>45 GB + 700 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 639 <s>৳ 798</s></div><a class="order" href="https://wa.me/971566612164?text=BL 45GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
-</div>
-<div class="footer">© 2026 Jannat Telecom | Abu Dhabi, UAE<br>WhatsApp: +971 566612164</div>
+.h{background:#00a651;color:#fff;padding:22px 12px 28px;text-align:center;border-radius:0 0 22px 22px}
+.h h1{font-size:28px}.h p{margin-top:6px;font-size:15px}
+.marquee{background:#fff8dc;border:1px solid #ffe08a;margin:12px;padding:11px;border-radius:12px;text-align:center;color:#7a5b00;font-size:15px;overflow:hidden;white-space:nowrap}
+.marquee span{display:inline-block;animation:m 12s linear infinite}
+@keyframes m{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.offer{background:#ff2e88;color:#fff;margin:0 12px;padding:16px;border-radius:14px;font-size:17px;line-height:1.6}
+.ops{display:flex;gap:10px;overflow-x:auto;padding:14px 12px}
+.opBtn{min-width:85px;padding:12px 10px;border-radius:30px;border:2px solid #00a651;background:#fff;font-weight:bold;font-size:16px;cursor:pointer}
+.opBtn.active{background:#00a651;color:#fff}
+.card{background:#fff;margin:0 12px 12px;padding:14px;border-radius:14px;display:flex;gap:12px;align-items:center}
+.logo{width:58px;height:58px;min-width:58px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;text-align:center;line-height:1}
+.logo.GP{background:#0057b8}.logo.Robi{background:#e60000}.logo.Airtel{background:#e40000}.logo.Banglalink{background:#ff6a00}.logo.Teletalk{background:#007a3d}
+.card b{font-size:17px;line-height:1.4;display:block}
+.card small{color:#666;font-size:13px}
+.right{margin-left:auto;text-align:right}
+.price{color:#00a651;font-size:22px;font-weight:bold}
+.price s{color:#999;font-size:13px;display:block}
+.btn{background:#00a651;color:#fff;border:none;padding:11px 13px;border-radius:10px;font-weight:bold;font-size:15px;margin-top:8px;cursor:pointer}
+.foot{text-align:center;color:#888;font-size:13px;padding:10px}
+</style></head><body>
+<div class="h"><h1>🌙 JANNAT TELECOM</h1><p>সব অফার এক জায়গায়</p></div>
+<div class="marquee"><span>স্বাগতম JANNAT TELECOM-এ! দ্রুত ও নিরাপদ রিচার্জ ✦ সেরা দামে সেরা অফার ✦</span></div>
+<div class="offer"><b>🎁 বিশেষ অফার</b><br>🔥 ধামাকা অফার! GP 100GB + 100 মিনিট মাত্র ৭৫০ টাকা! স্টক সীমিত, দ্রুত অর্ডার করুন!</div>
+<div class="ops" id="opList"></div>
+<div id="pkgList"></div>
+<p class="foot">Jannat Telecom © 2026 | অর্ডার করতে Order Now চাপ দিন</p>
 <script>
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e)=>{e.preventDefault();deferredPrompt=e;});
-document.getElementById('installBtn').addEventListener('click', async ()=>{
-if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}
-else{alert('উপরে 3 ডট / Share এ গিয়ে Add to Home Screen দিন');}
+let defaultPkgs=[
+{id:1,op:'Grameenphone',name:'100 জিবি ১০০ মিনিট 30 দিন',price:750,old:899},
+{id:2,op:'Grameenphone',name:'unlimited data 30 day',price:899,old:999},
+{id:3,op:'Grameenphone',name:'60 জিবি ডাটা 30 দিন মেয়াদ',price:698,old:799},
+{id:4,op:'Robi',name:'20GB 30 দিন',price:299,old:359},
+{id:5,op:'Robi',name:'40GB + 500 মিনিট',price:499,old:599},
+{id:6,op:'Airtel',name:'25GB 30 দিন',price:349,old:429},
+{id:7,op:'Banglalink',name:'15GB 30 দিন',price:249,old:299},
+{id:8,op:'Teletalk',name:'10GB 30 দিন',price:199,old:249},
+];
+let pkgs=JSON.parse(localStorage.getItem('j_pkgs')||'null')||defaultPkgs;
+let ops=['Grameenphone','Robi','Airtel','Banglalink','Teletalk'];
+let short={Grameenphone:'GP',Robi:'Robi',Airtel:'Airtel',Banglalink:'Banglalink',Teletalk:'Teletalk'};
+let logoTxt={Grameenphone:'GP',Robi:'Robi',Airtel:'airtel',Banglalink:'BL',Teletalk:'TT'};
+let sel='Grameenphone';
+function render(){
+let oh='';ops.forEach(o=>{oh+=`<button class="opBtn ${sel===o?'active':''}" onclick="sel='${o}';render()">${short[o]}</button>`});
+document.getElementById('opList').innerHTML=oh;
+let list=pkgs.filter(p=>p.op===sel);
+let h='';if(list.length===0)h='<div class="card">এই অপারেটরে কোনো প্যাকেজ নাই</div>';
+list.forEach(p=>{
+h+=`<div class="card"><div class="logo ${short[p.op]}">${logoTxt[p.op]}</div><div><b>${p.name}</b><small>${short[p.op]} • 30 দিন</small></div><div class="right"><div class="price">৳${p.price}<s>৳${p.old}</s></div><button class="btn" onclick="order('${p.name}',${p.price})">Order Now</button></div></div>`;
 });
-</script>
-</body>
-</html>
+document.getElementById('pkgList').innerHTML=h;
+}
+function order(n,p){
+let msg=encodeURIComponent('আসসালামু আলাইকুম, আমি এই প্যাকেজটি নিতে চাই: '+n+' - ৳'+p);
+window.open('https://wa.me/8801955579367?text='+msg,'_blank');
+}
+render();
+</script></body></html>
