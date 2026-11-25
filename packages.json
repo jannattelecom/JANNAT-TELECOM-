@@ -1,10 +1,51 @@
 [
-  {"id":1,"op":"Grameenphone","name":"100 জিবি 100 মিনিট 30 দিন","price":750,"old":899},
-  {"id":2,"op":"Grameenphone","name":"unlimited data 30 day","price":899,"old":999},
-  {"id":3,"op":"Grameenphone","name":"60 জিবি ডাটা 30 দিন মেয়াদ","price":698,"old":799},
-  {"id":4,"op":"Robi","name":"20GB 30 দিন","price":299,"old":359},
-  {"id":5,"op":"Robi","name":"40GB + 500 মিনিট","price":499,"old":599},
-  {"id":6,"op":"Airtel","name":"25GB 30 দিন","price":349,"old":429},
-  {"id":7,"op":"Banglalink","name":"15GB 30 দিন","price":249,"old":299},
-  {"id":8,"op":"Teletalk","name":"10GB 30 দিন","price":199,"old":249}
+  {
+    "id": 2,
+    "op": "Grameenphone",
+    "name": "unlimited data 30 day",
+    "price": 899,
+    "old": 999
+  },
+  {
+    "id": 3,
+    "op": "Grameenphone",
+    "name": "60 জিবি ডাটা 30 দিন মেয়াদ",
+    "price": 698,
+    "old": 799
+  },
+  {
+    "id": 4,
+    "op": "Robi",
+    "name": "20GB 30 দিন",
+    "price": 299,
+    "old": 359
+  },
+  {
+    "id": 5,
+    "op": "Robi",
+    "name": "40GB + 500 মিনিট",
+    "price": 499,
+    "old": 599
+  },
+  {
+    "id": 6,
+    "op": "Airtel",
+    "name": "25GB 30 দিন",
+    "price": 349,
+    "old": 429
+  },
+  {
+    "id": 7,
+    "op": "Banglalink",
+    "name": "15GB 30 দিন",
+    "price": 249,
+    "old": 299
+  },
+  {
+    "id": 8,
+    "op": "Teletalk",
+    "name": "10GB 30 দিন",
+    "price": 199,
+    "old": 249
+  }
 ]
