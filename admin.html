@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="bn"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - Jannat Telecom</title>
+<style>
+*{box-sizing:border-box;font-family:sans-serif;margin:0;padding:0}
+body{background:#f0f2f5}
+.h{background:#ff0080;color:#fff;padding:16px;text-align:center;font-size:22px;font-weight:bold}
+.card{background:#fff;margin:12px;padding:16px;border-radius:12px}
+input,select{width:100%;padding:12px;margin:6px 0;border:1px solid #ddd;border-radius:8px;font-size:15px}
+button{width:100%;padding:12px;background:#ff0080;color:#fff;border:none;border-radius:8px;font-weight:bold;font-size:16px}
+.small{padding:8px;font-size:13px;width:auto}
+.red{background:#ff3b30}.orange{background:#ff9500}
+.pkg{display:flex;justify-content:space-between;align-items:center;background:#f9f9f9;padding:12px;border-radius:10px;margin:8px 0}
+</style></head><body>
+<div class="h">🛠️ Admin - Jannat Telecom</div>
+<div class="card">
+<h3>নতুন প্যাকেজ যোগ করুন</h3>
+<select id="aOp">
+<option value="Grameenphone">Grameenphone</option>
+<option value="Robi">Robi</option>
+<option value="Airtel">Airtel</option>
+<option value="Banglalink">Banglalink</option>
+<option value="Teletalk">Teletalk</option>
+</select>
+<input id="aName" placeholder="প্যাকেজের নাম, যেমন: 30GB 30 দিন">
+<input id="aPrice" type="number" placeholder="দাম, যেমন: 399">
+<input id="aOld" type="number" placeholder="আগের দাম">
+<button onclick="addPkg()">+ প্যাকেজ যোগ করুন</button>
+</div>
+<div class="card"><h3>সব প্যাকেজ</h3><div id="list"></div></div>
+<div class="card"><button onclick="location.href='index.html'">কাস্টমার পেজ দেখুন</button></div>
+<script>
+let defaultPkgs=[
+{id:1,op:'Grameenphone',name:'30GB 30 দিন',price:399,old:499},
+{id:2,op:'Robi',name:'20GB 30 দিন',price:299,old:359},
+{id:3,op:'Airtel',name:'25GB 30 দিন',price:349,old:429},
+{id:4,op:'Banglalink',name:'15GB 30 দিন',price:249,old:299},
+{id:5,op:'Teletalk',name:'10GB 30 দিন',price:199,old:249},
+];
+let pkgs=JSON.parse(localStorage.getItem('j_pkgs')||'null')||defaultPkgs;
+function save(){localStorage.setItem('j_pkgs',JSON.stringify(pkgs));render();}
+function render(){
+let h='';pkgs.forEach(p=>{
+h+=`<div class="pkg"><div><b>[${p.op}] ${p.name}</b><br>৳${p.price} <s>৳${p.old}</s></div><div style="display:flex;gap:5px"><button class="small orange" onclick="editPkg(${p.id})">দাম বদলান</button><button class="small red" onclick="delPkg(${p.id})">ডিলিট</button></div></div>`;
+});document.getElementById('list').innerHTML=h;
+}
+function addPkg(){
+let op=document.getElementById('aOp').value;
+let name=document.getElementById('aName').value;
+let price=parseInt(document.getElementById('aPrice').value);
+let old=parseInt(document.getElementById('aOld').value)||price+100;
+if(!name||!price){alert('নাম আর দাম দিন');return;}
+pkgs.push({id:Date.now(),op,name,price,old});save();alert('হয়ে গেছে!');
+document.getElementById('aName').value='';document.getElementById('aPrice').value='';
+}
+function editPkg(id){let p=pkgs.find(x=>x.id===id);let np=prompt('নতুন দাম দিন - '+p.name,p.price);if(np){p.price=parseInt(np);save();}}
+function delPkg(id){if(confirm('ডিলিট করবেন?')){pkgs=pkgs.filter(x=>x.id!==id);save();}}
+render();
+</script></body></html>
