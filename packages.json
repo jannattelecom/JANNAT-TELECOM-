@@ -1,12 +1,5 @@
 [
   {
-    "id": 1,
-    "op": "Grameenphone",
-    "name": "100 জিবি 100 মিনিট 30 দিন",
-    "price": 750,
-    "old": 899
-  },
-  {
     "id": 2,
     "op": "Grameenphone",
     "name": "unlimited data 30 day",
