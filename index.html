@@ -4,17 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jannat Telecom - Best Recharge Offer</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#ff0080">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
 body{background:#f0f2f5}
 .header{background:linear-gradient(135deg,#ff0080,#7928ca);color:#fff;text-align:center;padding:30px 15px;border-radius:0 0 25px 25px}
 .header h1{font-size:32px}
-.header p{margin-top:8px;opacity:.9}
+.header p{margin-top:8px}
 .btn{display:inline-block;background:#25D366;color:#fff;padding:12px 25px;border-radius:30px;text-decoration:none;font-weight:bold;margin-top:15px}
+.installBtn{display:block;background:#ffc107;color:#000;text-align:center;padding:14px;margin:15px;border-radius:12px;font-weight:bold;border:0;width:calc(100% - 30px);font-size:16px}
 .container{padding:15px;max-width:500px;margin:auto}
 .card{background:#fff;border-radius:18px;padding:18px;margin-bottom:15px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.card h2{color:#ff0080;font-size:20px;margin-bottom:5px}
-.price{font-size:26px;font-weight:bold;color:#111}
+.price{font-size:26px;font-weight:bold}
 .price s{font-size:15px;color:#999}
 .tag{background:#ffebf3;color:#ff0080;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}
 .order{display:block;text-align:center;background:#111;color:#fff;padding:12px;border-radius:12px;text-decoration:none;margin-top:12px;font-weight:bold}
@@ -28,41 +30,21 @@ body{background:#f0f2f5}
 <p>১০০% বিশ্বস্ত - দ্রুত ডেলিভারি</p>
 <a class="btn" href="https://wa.me/971566612164">WhatsApp এ অর্ডার করুন</a>
 </div>
-
+<button class="installBtn" id="installBtn">📱 অ্যাপ ডাউনলোড করুন - হোম স্ক্রিনে রাখুন</button>
 <div class="container">
-<div class="card">
-<span class="tag">GRAMEENPHONE</span>
-<h2>40 GB + 800 Min</h2>
-<p>মেয়াদ: 30 দিন</p>
-<div class="price">৳ 649 <s>৳ 799</s></div>
-<a class="order" href="https://wa.me/971566612164?text=GP 40GB অফারটি নিতে চাই">অর্ডার করুন</a>
+<div class="card"><span class="tag">GRAMEENPHONE</span><h2>40 GB + 800 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 649 <s>৳ 799</s></div><a class="order" href="https://wa.me/971566612164?text=GP 40GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
+<div class="card"><span class="tag">ROBI</span><h2>50 GB + 1000 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 699 <s>৳ 899</s></div><a class="order" href="https://wa.me/971566612164?text=Robi 50GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
+<div class="card"><span class="tag">AIRTEL</span><h2>60 GB + 1100 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 719 <s>৳ 949</s></div><a class="order" href="https://wa.me/971566612164?text=Airtel 60GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
+<div class="card"><span class="tag">BANGLALINK</span><h2>45 GB + 700 Min</h2><p>মেয়াদ: 30 দিন</p><div class="price">৳ 639 <s>৳ 798</s></div><a class="order" href="https://wa.me/971566612164?text=BL 45GB অফারটি নিতে চাই">অর্ডার করুন</a></div>
 </div>
-
-<div class="card">
-<span class="tag">ROBI</span>
-<h2>50 GB + 1000 Min</h2>
-<p>মেয়াদ: 30 দিন</p>
-<div class="price">৳ 699 <s>৳ 899</s></div>
-<a class="order" href="https://wa.me/971566612164?text=Robi 50GB অফারটি নিতে চাই">অর্ডার করুন</a>
-</div>
-
-<div class="card">
-<span class="tag">AIRTEL</span>
-<h2>60 GB + 1100 Min</h2>
-<p>মেয়াদ: 30 দিন</p>
-<div class="price">৳ 719 <s>৳ 949</s></div>
-<a class="order" href="https://wa.me/971566612164?text=Airtel 60GB অফারটি নিতে চাই">অর্ডার করুন</a>
-</div>
-
-<div class="card">
-<span class="tag">BANGLALINK</span>
-<h2>45 GB + 700 Min</h2>
-<p>মেয়াদ: 30 দিন</p>
-<div class="price">৳ 639 <s>৳ 798</s></div>
-<a class="order" href="https://wa.me/971566612164?text=BL 45GB অফারটি নিতে চাই">অর্ডার করুন</a>
-</div>
-</div>
-
 <div class="footer">© 2026 Jannat Telecom | Abu Dhabi, UAE<br>WhatsApp: +971 566612164</div>
+<script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e)=>{e.preventDefault();deferredPrompt=e;});
+document.getElementById('installBtn').addEventListener('click', async ()=>{
+if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;}
+else{alert('উপরে 3 ডট / Share এ গিয়ে Add to Home Screen দিন');}
+});
+</script>
 </body>
 </html>
